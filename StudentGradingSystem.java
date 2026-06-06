@@ -1,11 +1,11 @@
 class Student {
     private String studentID;
     private String studentName;
-    private int marks;
-    public Student(String studentID, String studentName, int marks) {
+    private int[] marks;
+    public Student(String studentID, String studentName) {
         this.studentID=studentID;
         this.studentName=studentName;
-        this.marks=marks;
+        marks = new int[5];
     }
     public String getStudentID() {
         return studentID;
@@ -19,18 +19,16 @@ class Student {
     public void SetStudentName(String studentName) {
         this.studentName=studentName;
     }
-    public int getMarks() {
-        return marks;
+    public void getMarks() {
+        for(int i = 0; i < 5; i++) {
+            System.out.print(marks[i]+", ");
+        }
     }
-    public void setMarks(int marks) {
-        this.marks=marks;
-    }
-
     public void displayInfo() {
         System.out.println();
         System.out.println("Student ID: "+getStudentID());
         System.out.println("Student Name: "+getStudentName());
-        System.out.println("Student marks: "+getMarks());
+        System.out.print("Student marks: ");getMarks();
     }
 }
 
