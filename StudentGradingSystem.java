@@ -48,29 +48,70 @@ class Student {
         System.out.println("Student ID: "+getStudentID());
         System.out.println("Student Name: "+getStudentName());
         System.out.print("Student marks: ");getMarks();
-        System.out.println("Average  mark: "+getAverage());
+        System.out.println();
+        System.out.println("Average mark: "+getAverage());
+    }
+}
+
+class Classroom {
+    Scanner scanner = new Scanner(System.in);
+    Student[] students;
+    int count;
+    public Classroom() {
+        students = new Student[10];
+        count = 0;
+    }
+    public void createStudent() {
+        if (count < 10) {
+            System.out.println();
+            System.out.println("Creating student...");
+            System.out.print("Enter Student ID: ");
+            String studentID = scanner.nextLine();
+            System.out.print("Enter student name: ");
+            String studentName = scanner.nextLine();
+            Student studentRecord = new Student(studentID, studentName);
+            studentRecord.setMarks();
+            System.out.println("Student "+studentName+" created successfully.");
+            students[count] = studentRecord;
+        } else {
+            System.out.println("There is no space for input another student record.");
+        }
+    }
+    public void displayAll() {
+        for(int j = 0; j <= count; j++) {
+            students[j].displayInfo();
+        }
     }
 }
 
 public class  StudentGradingSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Classroom classroom = new Classroom();
+        int userInput;
         do {
+            System.out.println();
             System.out.println("======== Student Grading System ========");
             System.out.println("----------------------------------------");
             System.out.println("> Select the choice you want from below <");
-            System.out.println("1. Veiw all the student details.");
-            System.out.println("2. View a student.");
-            System.out.println("3. Edit student details.");
-            System.out.println("4. Enter a Student.");
+            System.out.println("1. Create a Student.");
+            System.out.println("2. Veiw all the student details.");
+            System.out.println("3. View a student.");
+            System.out.println("4. Edit student details.");
             System.out.println("5. Delete a Student.");
             System.out.println("6. Average marks list");
             System.out.println("7. Exit");
-            int userInput = input.nextInt();
+            System.out.println();
+            System.out.print("Enter choice: ");
+            userInput = input.nextInt();
             switch(userInput) {
-                case 1:
-
+                case 1:                    
+                    classroom.createStudent();
+                    break;
+                case 2:
+                    classroom.displayAll();
+                default:    
             }
-        } while (false);
+        } while (userInput!=7);
     }
 }
