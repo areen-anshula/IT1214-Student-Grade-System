@@ -119,6 +119,7 @@ class Classroom {
                     String newStuName = scanner.nextLine();
                     students[n].setStudentID(newStuID);
                     students[n].SetStudentName(newStuName);
+                    students[n].setMarks();
                 }
             } 
         }       
@@ -156,7 +157,7 @@ public class  StudentGradingSystem {
                     classroom.searchForaStudent();
                     break;
                 case 4:
-                        
+                    classroom.editStudent();    
                 default:    
             }
         } while (userInput!=7);
