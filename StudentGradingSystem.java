@@ -96,12 +96,13 @@ class Classroom {
             System.out.println("No student details are found!");
         } else {
             for(int n = 0; n < count; n++) {
+                boolean found = false;
                 if(students[n].getStudentID().equals(stuID)) {
+                    System.out.println("Displaying details of "+students[n].getStudentID());
                     students[n].displayInfo();
+                    found = true;
                     break;
-                } else {
-                    System.out.println("Student not found!");
-                }
+                } 
             }
         }
     }
@@ -123,6 +124,23 @@ class Classroom {
                 }
             } 
         }       
+    }
+    public void deleteStudent() {
+        System.out.println("Enter the student ID: ");
+        String stuID = scanner.nextLine();
+        if(count==0) {
+            System.out.println("No student details are found");
+        } else {
+            for(int m = 0; m < count; m++) {
+                if(students[m].getStudentID().equals(stuID)) {
+                    System.out.println("Student record of "+students[m].getStudentName()+" deleted successfully.");
+                    for (int n = m; n < count-1; n++ ) {
+                        students[n] = students[n+1];
+                    }
+                    count--;
+                }
+            }
+        }
     }
 }
 
@@ -157,7 +175,10 @@ public class  StudentGradingSystem {
                     classroom.searchForaStudent();
                     break;
                 case 4:
-                    classroom.editStudent();    
+                    classroom.editStudent();  
+                    break;
+                case 5:
+                    classroom.deleteStudent();
                 default:    
             }
         } while (userInput!=7);
