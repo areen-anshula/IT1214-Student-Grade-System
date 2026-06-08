@@ -8,48 +8,57 @@ class Student {
     Scanner sc = new Scanner(System.in);
 
     public Student(String studentID, String studentName) {
-        this.studentID=studentID;
-        this.studentName=studentName;
+        this.studentID = studentID;
+        this.studentName = studentName;
         marks = new int[5];
     }
+
     public String getStudentID() {
         return studentID;
     }
+
     public void setStudentID(String studentID) {
-        this.studentID=studentID;
+        this.studentID = studentID;
     }
+
     public String getStudentName() {
         return studentName;
     }
+
     public void SetStudentName(String studentName) {
-        this.studentName=studentName;
+        this.studentName = studentName;
     }
+
     public void setMarks() {
-        for(int i = 0; i < 5; i++) {
-            System.out.print("Enter subject "+(i+1)+" marks: ");
-            marks[i]=sc.nextInt();
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter subject " + (i + 1) + " marks: ");
+            marks[i] = sc.nextInt();
         }
     }
+
     public void getMarks() {
-        for(int i = 0; i < 5; i++) {
-            System.out.print(marks[i]+", ");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(marks[i] + ", ");
         }
     }
+
     public double getAverage() {
         double avg;
         int sum = 0;
-        for(int i=0; i<5; i++) {
-            sum+=marks[i];
+        for (int i = 0; i < 5; i++) {
+            sum += marks[i];
         }
-        return avg=(double)sum/5;
+        return avg = (double) sum / 5;
     }
+
     public void displayInfo() {
         System.out.println();
-        System.out.println("Student ID: "+getStudentID());
-        System.out.println("Student Name: "+getStudentName());
-        System.out.print("Student marks: ");getMarks();
+        System.out.println("Student ID: " + getStudentID());
+        System.out.println("Student Name: " + getStudentName());
+        System.out.print("Student marks: ");
+        getMarks();
         System.out.println();
-        System.out.println("Average mark: "+getAverage());
+        System.out.println("Average mark: " + getAverage());
     }
 }
 
@@ -57,10 +66,12 @@ class Classroom {
     Scanner scanner = new Scanner(System.in);
     Student[] students;
     int count;
+
     public Classroom() {
         students = new Student[10];
         count = 0;
     }
+
     public void createStudent() {
         if (count < 10) {
             System.out.println();
@@ -71,49 +82,59 @@ class Classroom {
             String studentName = scanner.nextLine();
             Student studentRecord = new Student(studentID, studentName);
             studentRecord.setMarks();
-            System.out.println("Student "+studentName+" created successfully.");
+            System.out.println("Student " + studentName + " created successfully.");
             students[count] = studentRecord;
             count++;
         } else {
             System.out.println("There is no space for input another student record.");
         }
     }
+
     public void displayAll() {
         System.out.println();
         if (count == 0) {
             System.out.println("No student details are found!");
         } else {
             System.out.println("Displaying all students...");
-            for(int j = 0; j < count; j++) {
+            for (int j = 0; j < count; j++) {
                 students[j].displayInfo();
             }
         }
     }
+
     public void searchForaStudent() {
         System.out.print("Enter the Student ID: ");
         String stuID = scanner.nextLine();
-        if(count == 0) {
+        if (count == 0) {
+            System.out.println();
             System.out.println("No student details are found!");
         } else {
-            for(int n = 0; n < count; n++) {
-                boolean found = false;
-                if(students[n].getStudentID().equals(stuID)) {
-                    System.out.println("Displaying details of "+students[n].getStudentID());
+            boolean found = false;
+            for (int n = 0; n < count; n++) {
+                if (students[n].getStudentID().equals(stuID)) {
+                    System.out.println("Displaying details of " + students[n].getStudentID());
                     students[n].displayInfo();
                     found = true;
                     break;
-                } 
+                }
+            }
+            if(found==false) {
+                System.out.println();
+                System.out.println("No student details are found!");
             }
         }
     }
+
     public void editStudent() {
         System.out.print("Enter the Student ID: ");
         String stuID = scanner.nextLine();
-        if(count == 0) {
+        if (count == 0) {
+            System.out.println();
             System.out.println("No student details are found!");
         } else {
-            for(int n = 0; n < count; n++) {
-                if(students[n].getStudentID().equals(stuID)) {
+            boolean foundStu = false;
+            for (int n = 0; n < count; n++) {
+                if (students[n].getStudentID().equals(stuID)) {
                     System.out.print("Enter new student ID: ");
                     String newStuID = scanner.nextLine();
                     System.out.print("Enter new student name: ");
@@ -121,30 +142,43 @@ class Classroom {
                     students[n].setStudentID(newStuID);
                     students[n].SetStudentName(newStuName);
                     students[n].setMarks();
+                    foundStu = true;
                 }
-            } 
-        }       
+            }
+            if(foundStu==false) {
+                System.out.println();
+                System.out.println("No student details are found!");
+            }
+        }
     }
+
     public void deleteStudent() {
         System.out.println("Enter the student ID: ");
         String stuID = scanner.nextLine();
-        if(count==0) {
+        if (count == 0) {
+            System.out.println();
             System.out.println("No student details are found");
         } else {
-            for(int m = 0; m < count; m++) {
-                if(students[m].getStudentID().equals(stuID)) {
-                    System.out.println("Student record of "+students[m].getStudentName()+" deleted successfully.");
-                    for (int n = m; n < count-1; n++ ) {
-                        students[n] = students[n+1];
+            boolean foundStuDe = false;
+            for (int m = 0; m < count; m++) {
+                if (students[m].getStudentID().equals(stuID)) {
+                    System.out.println("Student record of " + students[m].getStudentName() + " deleted successfully.");
+                    for (int n = m; n < count - 1; n++) {
+                        students[n] = students[n + 1];
+                        foundStuDe = true;
                     }
                     count--;
                 }
+            }
+            if (foundStuDe == true) {
+                System.out.println();
+                System.out.println("No student details are found!");
             }
         }
     }
 }
 
-public class  StudentGradingSystem {
+public class StudentGradingSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Classroom classroom = new Classroom();
@@ -164,8 +198,8 @@ public class  StudentGradingSystem {
             System.out.println();
             System.out.print("Enter choice: ");
             userInput = input.nextInt();
-            switch(userInput) {
-                case 1:                    
+            switch (userInput) {
+                case 1:
                     classroom.createStudent();
                     break;
                 case 2:
@@ -175,12 +209,13 @@ public class  StudentGradingSystem {
                     classroom.searchForaStudent();
                     break;
                 case 4:
-                    classroom.editStudent();  
+                    classroom.editStudent();
                     break;
                 case 5:
                     classroom.deleteStudent();
-                default:    
+                    break;
+                default:
             }
-        } while (userInput!=7);
+        } while (userInput != 7);
     }
 }
