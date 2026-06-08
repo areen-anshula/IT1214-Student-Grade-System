@@ -73,14 +73,56 @@ class Classroom {
             studentRecord.setMarks();
             System.out.println("Student "+studentName+" created successfully.");
             students[count] = studentRecord;
+            count++;
         } else {
             System.out.println("There is no space for input another student record.");
         }
     }
     public void displayAll() {
-        for(int j = 0; j <= count; j++) {
-            students[j].displayInfo();
+        System.out.println();
+        if (count == 0) {
+            System.out.println("No student details are found!");
+        } else {
+            System.out.println("Displaying all students...");
+            for(int j = 0; j < count; j++) {
+                students[j].displayInfo();
+            }
         }
+    }
+    public void searchForaStudent() {
+        System.out.print("Enter the Student ID: ");
+        String stuID = scanner.nextLine();
+        if(count == 0) {
+            System.out.println("No student details are found!");
+        } else {
+            for(int n = 0; n < count; n++) {
+                if(students[n].getStudentID().equals(stuID)) {
+                    students[n].displayInfo();
+                    break;
+                } else {
+                    System.out.println("Student not found!");
+                }
+            }
+        }
+    }
+    public void editStudent() {
+        System.out.print("Enter the Student ID: ");
+        String stuID = scanner.nextLine();
+        if(count == 0) {
+            System.out.println("No student details are found!");
+        } else {
+            for(int n = 0; n < count; n++) {
+                if(students[n].getStudentID().equals(stuID)) {
+                    System.out.print("Enter new student ID: ");
+                    String newStuID = scanner.nextLine();
+                    System.out.print("Enter new student name: ");
+                    String newStuName = scanner.nextLine();
+                    students[n].setStudentID(newStuID);
+                    students[n].SetStudentName(newStuName);
+                    students[n].setMarks();
+                }
+            } 
+        }       
     }
 }
 
@@ -110,6 +152,12 @@ public class  StudentGradingSystem {
                     break;
                 case 2:
                     classroom.displayAll();
+                    break;
+                case 3:
+                    classroom.searchForaStudent();
+                    break;
+                case 4:
+                    classroom.editStudent();    
                 default:    
             }
         } while (userInput!=7);
