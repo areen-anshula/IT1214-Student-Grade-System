@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Student {
@@ -183,9 +184,9 @@ public class StudentGradingSystem {
         Scanner input = new Scanner(System.in);
         Classroom classroom = new Classroom();
         int userInput;
-        do {
+        while (true) {
             System.out.println();
-            System.out.println("======== Student Grading System ========");
+            System.out.println("======== Student Grade System ========");
             System.out.println("----------------------------------------");
             System.out.println("> Select the choice you want from below <");
             System.out.println("1. Create a Student.");
@@ -193,9 +194,9 @@ public class StudentGradingSystem {
             System.out.println("3. View a student.");
             System.out.println("4. Edit student details.");
             System.out.println("5. Delete a Student.");
-            System.out.println("6. Average marks list");
-            System.out.println("7. Exit");
+            System.out.println("6. Exit");
             System.out.println();
+            try {
             System.out.print("Enter choice: ");
             userInput = input.nextInt();
             switch (userInput) {
@@ -207,15 +208,24 @@ public class StudentGradingSystem {
                     break;
                 case 3:
                     classroom.searchForaStudent();
-                    break;
+                        break;
                 case 4:
                     classroom.editStudent();
                     break;
                 case 5:
                     classroom.deleteStudent();
                     break;
+                case 6:
+                    return;    
                 default:
+                    System.out.println();
+                    System.out.println("Invalid user input!");
             }
-        } while (userInput != 7);
+            } catch (InputMismatchException p) {
+                System.out.println();
+                System.out.println("Invalid user input!");
+                input.nextLine();
+            } 
+        }        
     }
 }
