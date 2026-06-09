@@ -1,6 +1,4 @@
-<div>
-  <img style="width:100%" src="https://capsule-render.vercel.app/api?type=waving&height=100&section=header&reversal=false&fontSize=70&fontColor=FFFFFF&fontAlign=50&fontAlignY=50&stroke=-&descSize=20&descAlign=50&descAlignY=50&color=gradient"  />
-</div>
+
 <h1><b>IT1214-Student-Grade-System</b></h1>
 <b><h2>=== Student Grade System ===</h2></b>
 A private educational institute currently records student marks manually using paper records and spreadsheets. The institute has decided to develop a Student Grade Management System. The system should allow teachers to store student information digitally and manage academic records more effectively.
